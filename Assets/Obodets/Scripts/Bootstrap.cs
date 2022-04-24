@@ -1,4 +1,5 @@
 using Obodets.Scripts.Base;
+using Obodets.Scripts.LevelModule;
 using UnityEngine;
 
 namespace Obodets.Scripts
@@ -15,7 +16,7 @@ namespace Obodets.Scripts
 
         private void StartGame()
         {
-            levelLoader.LoadCurrentLevel();
+            levelLoader.LoadLevel(0);
             startButton.Hide();
         }
     }
