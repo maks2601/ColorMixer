@@ -9,12 +9,12 @@ namespace Obodets.Scripts.LevelModule
         [SerializeField] private TaskDisplay taskDisplay;
         [SerializeField] private BunchesSpawner bunchesSpawner;
 
-        public void LoadLevel(int levelIndex)
+        public void LoadLevel(int levelIndex, Transform blenderPoint)
         {
             var currentLevel = gameData.GetLevel(levelIndex);
 
             taskDisplay.SetTask(currentLevel.RequiredColor);
-            bunchesSpawner.Spawn(currentLevel.IngredientBunches);
+            bunchesSpawner.Spawn(currentLevel.IngredientBunches, blenderPoint);
         }
     }
 }

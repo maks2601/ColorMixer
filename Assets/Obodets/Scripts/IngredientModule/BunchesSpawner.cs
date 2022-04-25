@@ -7,11 +7,12 @@ namespace Obodets.Scripts.IngredientModule
     {
         [SerializeField] private List<Transform> spawnPlaces;
 
-        public void Spawn(List<IngredientBunch> bunches)
+        public void Spawn(List<IngredientBunch> bunches, Transform blenderPoint)
         {
             for (var i = 0; i < bunches.Count; i++)
             {
                 var bunch = Instantiate(bunches[i], spawnPlaces[i]);
+                bunch.Initialize(blenderPoint);
             }
         }
     }

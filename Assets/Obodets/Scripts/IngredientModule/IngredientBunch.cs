@@ -5,16 +5,23 @@ namespace Obodets.Scripts.IngredientModule
 {
     public sealed class IngredientBunch : MonoBehaviour
     {
-        [SerializeField] private Ingredient ingredient;
+        [SerializeField] private Ingredient ingredientPrefab;
+        private Transform _blenderPoint;
 
         private void OnMouseDown()
         {
-            throw new NotImplementedException();
+            var ingredient = SpawnIngredient();
+            ingredient.AddToBlender(_blenderPoint);
         }
 
-        public void SpawnIngredient()
+        private Ingredient SpawnIngredient()
         {
-            Instantiate(ingredient);
+            return Instantiate(ingredientPrefab, transform.position, transform.rotation);
+        }
+
+        public void Initialize(Transform blenderPoint)
+        {
+            _blenderPoint = blenderPoint;
         }
     }
 }
