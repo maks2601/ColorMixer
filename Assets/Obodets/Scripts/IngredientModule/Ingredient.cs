@@ -1,4 +1,6 @@
-﻿using Obodets.Scripts.AnimationModule;
+﻿using System.Collections.Generic;
+using Obodets.Scripts.AnimationModule;
+using Obodets.Scripts.Extensions;
 using UnityEngine;
 
 namespace Obodets.Scripts.IngredientModule
@@ -8,9 +10,21 @@ namespace Obodets.Scripts.IngredientModule
         [SerializeField] private MeshRenderer meshRenderer;
         [SerializeField] private JumpAnimator jumpAnimator;
 
-        public void AddToBlender(Transform blenderPoint)
+        public void JumpToBlender(Transform blenderPoint)
         {
             jumpAnimator.Jump(blenderPoint.position);
+        }
+
+        public Color GetIngredientColor()
+        {
+            var colors = new List<Color>();
+
+            foreach (var material in meshRenderer.materials)
+            {
+                colors.Add(material.color);
+            }
+
+            return colors.CalculateAverageColor();
         }
     }
 }

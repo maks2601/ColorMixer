@@ -1,4 +1,6 @@
-﻿using Obodets.Scripts.IngredientModule;
+﻿using System;
+using System.Collections.Generic;
+using Obodets.Scripts.IngredientModule;
 using UnityEngine;
 
 namespace Obodets.Scripts.LevelModule
@@ -7,14 +9,17 @@ namespace Obodets.Scripts.LevelModule
     {
         [SerializeField] private GameData gameData;
         [SerializeField] private TaskDisplay taskDisplay;
-        [SerializeField] private BunchesSpawner bunchesSpawner;
-
-        public void LoadLevel(int levelIndex, Transform blenderPoint)
+        private int _currentLevelIndex;
+        
+        public LevelData GetCurrentLevelData() => gameData.GetLevel(_currentLevelIndex);
+        
+        public void LoadLevel(int levelIndex, Action<List<IngredientBunch>> onLevelLoaded)
         {
+            _currentLevelIndex = levelIndex;
             var currentLevel = gameData.GetLevel(levelIndex);
 
             taskDisplay.SetTask(currentLevel.RequiredColor);
-            bunchesSpawner.Spawn(currentLevel.IngredientBunches, blenderPoint);
+            onLevelLoaded?.Invoke(currentLevel.IngredientBunches);
         }
     }
 }

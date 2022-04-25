@@ -7,11 +7,13 @@ namespace Obodets.Scripts.IngredientModule
     {
         [SerializeField] private Ingredient ingredientPrefab;
         private Transform _blenderPoint;
+        private Action<Ingredient> _onAddedToBlender;
 
         private void OnMouseDown()
         {
             var ingredient = SpawnIngredient();
-            ingredient.AddToBlender(_blenderPoint);
+            ingredient.JumpToBlender(_blenderPoint);
+            _onAddedToBlender?.Invoke(ingredient);
         }
 
         private Ingredient SpawnIngredient()
@@ -19,9 +21,10 @@ namespace Obodets.Scripts.IngredientModule
             return Instantiate(ingredientPrefab, transform.position, transform.rotation);
         }
 
-        public void Initialize(Transform blenderPoint)
+        public void Initialize(Transform blenderPoint, Action<Ingredient> onAddedToBlender)
         {
             _blenderPoint = blenderPoint;
+            _onAddedToBlender = onAddedToBlender;
         }
     }
 }

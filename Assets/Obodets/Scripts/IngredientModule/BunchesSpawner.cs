@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Obodets.Scripts.IngredientModule
@@ -7,12 +8,12 @@ namespace Obodets.Scripts.IngredientModule
     {
         [SerializeField] private List<Transform> spawnPlaces;
 
-        public void Spawn(List<IngredientBunch> bunches, Transform blenderPoint)
+        public void Spawn(List<IngredientBunch> bunches, Transform blenderPoint, Action<Ingredient> onAddedToBlender)
         {
             for (var i = 0; i < bunches.Count; i++)
             {
                 var bunch = Instantiate(bunches[i], spawnPlaces[i]);
-                bunch.Initialize(blenderPoint);
+                bunch.Initialize(blenderPoint, onAddedToBlender);
             }
         }
     }
