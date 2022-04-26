@@ -12,6 +12,7 @@ namespace Obodets.Scripts.BlenderModule
     {
         [SerializeField] private Transform ingredientPlacePoint;
         [SerializeField] private MixButton mixButton;
+        [SerializeField] private BlenderAnimator blenderAnimator;
         [SerializeField] private LiquidAnimator liquidAnimator;
         [SerializeField] private float mixingTime;
         [SerializeField] private float clearingTime;
@@ -69,6 +70,7 @@ namespace Obodets.Scripts.BlenderModule
         public void AddIngredient(Ingredient ingredient)
         {
             _ingredients.Add(ingredient);
+            blenderAnimator.IngredientHit();
         }
     }
 }

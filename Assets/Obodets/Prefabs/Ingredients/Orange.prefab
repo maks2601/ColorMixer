@@ -145,4 +145,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 4334825813071930440}
   jumpPower: 0.7
-  duration: 1.2
+  duration: 0.6
