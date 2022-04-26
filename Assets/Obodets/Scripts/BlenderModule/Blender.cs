@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Obodets.Scripts.AnimationModule;
 using Obodets.Scripts.Extensions;
 using Obodets.Scripts.IngredientModule;
@@ -29,12 +30,7 @@ namespace Obodets.Scripts.BlenderModule
 
         private void Mix()
         {
-            var colors = new List<Color>();
-
-            foreach (var ingredient in _ingredients)
-            {
-                colors.Add(ingredient.GetIngredientColor());
-            }
+            var colors = _ingredients.Select(ingredient => ingredient.GetIngredientColor()).ToList();
 
             var resultColor = colors.CalculateAverageColor();
             _onMixed?.Invoke(resultColor);

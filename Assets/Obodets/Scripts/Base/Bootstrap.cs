@@ -14,12 +14,12 @@ namespace Obodets.Scripts.Base
         [SerializeField] private MatchCalculator matchCalculator;
         [SerializeField] private Menu menu;
 
-        private void Awake()
+        private void Start()
         {
+            InitializeButtons();
             blender.Initialize(OnMixed);
             levelLoader.Initialize(OnLevelLoaded);
             menu.ActivateButton(MenuButton.Start);
-            InitializeButtons();
         }
 
         private void InitializeButtons()
@@ -31,11 +31,13 @@ namespace Obodets.Scripts.Base
 
         private void StartGame()
         {
+            matchCalculator.Initialize();
             levelLoader.Load(0);
         }
 
         private void OnLevelLoaded(List<IngredientBunch> bunches)
         {
+            matchCalculator.ResetPercent();
             blender.Clear();
             bunchesSpawner.Spawn(bunches, blender.IngredientPlacePoint, blender.AddIngredient);
         }

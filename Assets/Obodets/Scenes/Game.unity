@@ -2184,7 +2184,7 @@ GameObject:
   - component: {fileID: 1071591094}
   - component: {fileID: 1071591096}
   m_Layer: 0
-  m_Name: Water
+  m_Name: Liquid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2533,6 +2533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ae0cf9eaf4a46feaf1217ffa259d5c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 1314072756}
   slider: {fileID: 1314072758}
   requiredPercentToComplete: 60
 --- !u!114 &1314072758
@@ -2549,6 +2550,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 1876857724}
   percentText: {fileID: 1963541633}
+  changeDuration: 3
+  resetDuration: 1.5
 --- !u!1 &1352736778
 GameObject:
   m_ObjectHideFlags: 0
