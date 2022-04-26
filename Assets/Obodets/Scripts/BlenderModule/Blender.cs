@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Obodets.Scripts.AnimationModule;
 using Obodets.Scripts.Extensions;
 using Obodets.Scripts.IngredientModule;
 using UnityEngine;
@@ -11,7 +12,9 @@ namespace Obodets.Scripts.BlenderModule
     {
         [SerializeField] private Transform ingredientPlacePoint;
         [SerializeField] private MixButton mixButton;
+        [SerializeField] private LiquidAnimator liquidAnimator;
         [SerializeField] private float mixingTime;
+        [SerializeField] private float clearingTime;
         private readonly HashSet<Ingredient> _ingredients = new();
         private Action<Color> _onMixed;
 
@@ -19,6 +22,7 @@ namespace Obodets.Scripts.BlenderModule
 
         private void Awake()
         {
+            liquidAnimator.Empty(0);
             mixButton.Initialize(Mix);
         }
 
@@ -31,12 +35,15 @@ namespace Obodets.Scripts.BlenderModule
                 colors.Add(ingredient.GetIngredientColor());
             }
 
-            _onMixed?.Invoke(colors.CalculateAverageColor());
+            var resultColor = colors.CalculateAverageColor();
+            _onMixed?.Invoke(resultColor);
 
-            StartCoroutine(ClearBlender());
+            liquidAnimator.SetColor(resultColor);
+            liquidAnimator.Fill(mixingTime);
+            StartCoroutine(Mixing());
         }
 
-        private IEnumerator ClearBlender()
+        private IEnumerator Mixing()
         {
             var iterationTime = mixingTime / _ingredients.Count;
 
@@ -47,6 +54,11 @@ namespace Obodets.Scripts.BlenderModule
             }
             
             _ingredients.Clear();
+        }
+
+        public void Clear()
+        {
+            liquidAnimator.Empty(clearingTime);
         }
 
         public void Initialize(Action<Color> onMixed)

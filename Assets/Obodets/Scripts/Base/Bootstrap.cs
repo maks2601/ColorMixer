@@ -36,6 +36,7 @@ namespace Obodets.Scripts.Base
 
         private void OnLevelLoaded(List<IngredientBunch> bunches)
         {
+            blender.Clear();
             bunchesSpawner.Spawn(bunches, blender.IngredientPlacePoint, blender.AddIngredient);
         }
 
