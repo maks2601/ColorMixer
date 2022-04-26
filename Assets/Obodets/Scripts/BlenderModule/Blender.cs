@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Obodets.Scripts.Extensions;
 using Obodets.Scripts.IngredientModule;
@@ -10,6 +11,7 @@ namespace Obodets.Scripts.BlenderModule
     {
         [SerializeField] private Transform ingredientPlacePoint;
         [SerializeField] private MixButton mixButton;
+        [SerializeField] private float mixingTime;
         private readonly HashSet<Ingredient> _ingredients = new();
         private Action<Color> _onMixed;
 
@@ -30,13 +32,28 @@ namespace Obodets.Scripts.BlenderModule
             }
 
             _onMixed?.Invoke(colors.CalculateAverageColor());
+
+            StartCoroutine(ClearBlender());
+        }
+
+        private IEnumerator ClearBlender()
+        {
+            var iterationTime = mixingTime / _ingredients.Count;
+
+            foreach (var ingredient in _ingredients)
+            {
+                ingredient.Destroy();
+                yield return new WaitForSeconds(iterationTime);
+            }
+            
+            _ingredients.Clear();
         }
 
         public void Initialize(Action<Color> onMixed)
         {
             _onMixed = onMixed;
         }
-        
+
         public void AddIngredient(Ingredient ingredient)
         {
             _ingredients.Add(ingredient);

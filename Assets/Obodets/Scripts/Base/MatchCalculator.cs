@@ -7,7 +7,7 @@ namespace Obodets.Scripts.Base
     public class MatchCalculator : MonoBehaviour
     {
         [SerializeField] private PercentSlider slider;
-        [SerializeField] private int requiredPercentToComplete = 90;
+        [SerializeField] private int requiredPercentToComplete;
         private const int Percent = 100;
 
         private void Awake()

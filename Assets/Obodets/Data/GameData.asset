@@ -17,7 +17,13 @@ MonoBehaviour:
     - {fileID: 1933065306408370249, guid: 3e6aa20eab3811749870e31acd39a682, type: 3}
     - {fileID: 3755053148265434519, guid: 7959ad863e215bc4ebd2e4df256dd9a5, type: 3}
     requiredColor: {r: 0.51951575, g: 0.8117647, b: 0.20784311, a: 1}
-  - ingredientBunches: []
-    requiredColor: {r: 0, g: 0, b: 0, a: 0}
-  - ingredientBunches: []
-    requiredColor: {r: 0, g: 0, b: 0, a: 0}
+  - ingredientBunches:
+    - {fileID: 1933065306408370249, guid: 3e6aa20eab3811749870e31acd39a682, type: 3}
+    - {fileID: 9171576677904824719, guid: 2d8af640c1337aa47aae2793cf6daf01, type: 3}
+    - {fileID: 7991098954964534802, guid: 100866a9c390e19408f42fe37eff413d, type: 3}
+    requiredColor: {r: 0.764151, g: 0.48766443, b: 0.19031683, a: 1}
+  - ingredientBunches:
+    - {fileID: 2319010314072839524, guid: 26921ff214b18bd44b175181aa8c3e2a, type: 3}
+    - {fileID: 4453235533217555756, guid: dc88e800eb43ffe47ac0f1b30a3f9352, type: 3}
+    - {fileID: 2819480969100551097, guid: f085026412da1c143b3fba3f50bee677, type: 3}
+    requiredColor: {r: 0.49056602, g: 0.12680666, b: 0.14089042, a: 1}

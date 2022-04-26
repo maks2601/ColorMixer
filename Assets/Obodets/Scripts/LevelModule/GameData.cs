@@ -9,6 +9,7 @@ namespace Obodets.Scripts.LevelModule
         [ReorderableList(ListStyle.Boxed)] [SerializeField]
         private List<LevelData> levelsData;
 
+        public int GetLevelsCount() => levelsData.Count;
         public LevelData GetLevel(int index) => levelsData[index];
     }
 }

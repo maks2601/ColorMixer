@@ -26,5 +26,10 @@ namespace Obodets.Scripts.IngredientModule
 
             return colors.CalculateAverageColor();
         }
+
+        public void Destroy()
+        {
+            Destroy(gameObject);
+        }
     }
 }

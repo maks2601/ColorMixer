@@ -26,5 +26,10 @@ namespace Obodets.Scripts.IngredientModule
             _blenderPoint = blenderPoint;
             _onAddedToBlender = onAddedToBlender;
         }
+
+        public void Destroy()
+        {
+            Destroy(gameObject);
+        }
     }
 }
