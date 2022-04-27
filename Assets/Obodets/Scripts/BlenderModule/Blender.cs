@@ -30,6 +30,9 @@ namespace Obodets.Scripts.BlenderModule
 
         private void Mix()
         {
+            if (_ingredients.Count == 0) return;
+            
+            mixButton.Active(false);
             var colors = _ingredients.Select(ingredient => ingredient.GetIngredientColor()).ToList();
 
             var resultColor = colors.CalculateAverageColor();
@@ -55,6 +58,7 @@ namespace Obodets.Scripts.BlenderModule
 
         public void Clear()
         {
+            mixButton.Active(true);
             liquidAnimator.Empty(clearingTime);
         }
 

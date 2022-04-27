@@ -10,18 +10,25 @@ namespace Obodets.Scripts.AnimationModule
         [SerializeField] private float deflection;
         [SerializeField] private float shakeDuration;
         private Sequence _sequence;
+        private Vector3 _defaultRotation;
+
+        private void Awake()
+        {
+            _defaultRotation = transform.localRotation.eulerAngles;
+        }
 
         private void Shake()
         {
-            var rotation = transform.localRotation.eulerAngles;
             var rotateDuration = shakeDuration / (fluctuationsCount * 2 + 1);
             for (var i = 0; i < fluctuationsCount; i++)
             {
-                _sequence.Append(transform.DOLocalRotate(rotation + Vector3.forward * deflection, rotateDuration));
-                _sequence.Append(transform.DOLocalRotate(rotation - Vector3.forward * deflection, rotateDuration));
+                _sequence.Append(transform.DOLocalRotate(_defaultRotation + Vector3.forward * deflection,
+                    rotateDuration));
+                _sequence.Append(transform.DOLocalRotate(_defaultRotation - Vector3.forward * deflection,
+                    rotateDuration));
             }
 
-            _sequence.Append(transform.DOLocalRotate(rotation, shakeDuration));
+            _sequence.Append(transform.DOLocalRotate(_defaultRotation, shakeDuration));
         }
 
         public void IngredientHit()
