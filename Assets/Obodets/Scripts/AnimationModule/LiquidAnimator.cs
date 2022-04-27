@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Obodets.Scripts.AnimationModule
 {
-    public sealed class LiquidAnimator : MonoBehaviour
+    public class LiquidAnimator : MonoBehaviour
     {
         [SerializeField] private float minSizeY;
         [SerializeField] private float maxSizeY;

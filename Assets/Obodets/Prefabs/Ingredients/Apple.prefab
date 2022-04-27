@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7f8801a6a04c3898db8edf51a1d42d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshRenderer: {fileID: 300803926961224558}
+  color: {r: 0.3294907, g: 0.8396226, b: 0.22495545, a: 1}
   jumpAnimator: {fileID: 3979117677286917676}
 --- !u!135 &6924097557147181613
 SphereCollider:

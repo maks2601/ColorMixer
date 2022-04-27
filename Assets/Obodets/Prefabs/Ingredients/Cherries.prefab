@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7f8801a6a04c3898db8edf51a1d42d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshRenderer: {fileID: 2507152426170894587}
+  color: {r: 0.8301887, g: 0.2145959, b: 0.2145959, a: 1}
   jumpAnimator: {fileID: 8395168621533643851}
 --- !u!136 &8696966947592905424
 CapsuleCollider:

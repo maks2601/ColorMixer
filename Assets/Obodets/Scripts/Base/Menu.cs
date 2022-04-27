@@ -11,7 +11,7 @@ namespace Obodets.Scripts.Base
         NextLevel
     }
 
-    public class Menu : MonoBehaviour
+    public sealed class Menu : MonoBehaviour
     {
         [SerializeField] private CanvasGroup menu;
         [SerializeField] private SerializedDictionary<MenuButton, HighlightButton> buttons;

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Obodets.Scripts.AnimationModule
 {
     [RequireComponent(typeof(Rigidbody))]
-    public sealed class JumpAnimator : MonoBehaviour
+    public class JumpAnimator : MonoBehaviour
     {
         [SerializeField] private Rigidbody rb;
         [SerializeField] private float jumpPower;

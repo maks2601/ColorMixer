@@ -33,7 +33,7 @@ namespace Obodets.Scripts.BlenderModule
             if (_ingredients.Count == 0) return;
             
             mixButton.Active(false);
-            var colors = _ingredients.Select(ingredient => ingredient.GetIngredientColor()).ToList();
+            var colors = _ingredients.Select(ingredient => ingredient.IngredientColor).ToList();
 
             var resultColor = colors.CalculateAverageColor();
             _onMixed?.Invoke(resultColor);

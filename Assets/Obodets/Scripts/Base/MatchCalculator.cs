@@ -29,7 +29,7 @@ namespace Obodets.Scripts.Base
 
         public bool Match(Color resultColor, Color requiredColor)
         {
-            var ratio = resultColor.CalculateColorDifference(requiredColor) * Percent;
+            var ratio = Mathf.Ceil(resultColor.CalculateColorDifference(requiredColor) * Percent);
             slider.SetValue(Convert.ToInt32(ratio));
             return ratio >= requiredPercentToComplete;
         }

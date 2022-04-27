@@ -1,5 +1,4 @@
-﻿using System;
-using Obodets.Scripts.Extensions;
+﻿using Obodets.Scripts.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,12 +14,12 @@ namespace Obodets.Scripts.LevelModule
             HideTask();
         }
 
-        public void HideTask()
+        private void HideTask()
         {
             canvasGroup.SetActive(false);
         }
-        
-        public void ShowTask()
+
+        private void ShowTask()
         {
             canvasGroup.SetActive(true);
         }

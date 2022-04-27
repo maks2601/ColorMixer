@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Obodets.Scripts.AnimationModule
 {
-    public sealed class BlenderAnimator : MonoBehaviour
+    public class BlenderAnimator : MonoBehaviour
     {
         [SerializeField] private LidAnimator lidAnimator;
         [SerializeField] private int fluctuationsCount;

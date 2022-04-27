@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Obodets.Scripts.AnimationModule
 {
-    public sealed class LidAnimator : MonoBehaviour
+    public class LidAnimator : MonoBehaviour
     {
         [SerializeField] private float openDuration;
         [SerializeField] private float closeDuration;
