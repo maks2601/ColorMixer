@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Obodets.Scripts.IngredientModule
 {
-    public sealed class BunchesSpawner : MonoBehaviour
+    public sealed class BunchesList : MonoBehaviour
     {
         [SerializeField] private List<Transform> spawnPlaces;
         private readonly List<IngredientBunch> _bunches = new();
@@ -23,6 +23,14 @@ namespace Obodets.Scripts.IngredientModule
                 var bunch = Instantiate(bunches[i], spawnPlaces[i]);
                 bunch.Initialize(blenderPoint, onAddedToBlender);
                 _bunches.Add(bunch);
+            }
+        }
+
+        public void ActiveSpawn(bool state)
+        {
+            foreach (var bunch in _bunches)
+            {
+                bunch.ActiveSpawn(state);
             }
         }
     }

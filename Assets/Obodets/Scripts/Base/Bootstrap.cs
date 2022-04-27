@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Obodets.Scripts.BlenderModule;
 using Obodets.Scripts.IngredientModule;
@@ -9,7 +10,7 @@ namespace Obodets.Scripts.Base
     public sealed class Bootstrap : MonoBehaviour
     {
         [SerializeField] private LevelLoader levelLoader;
-        [SerializeField] private BunchesSpawner bunchesSpawner;
+        [SerializeField] private BunchesList bunchesList;
         [SerializeField] private Blender blender;
         [SerializeField] private MatchCalculator matchCalculator;
         [SerializeField] private Menu menu;
@@ -17,7 +18,7 @@ namespace Obodets.Scripts.Base
         private void Start()
         {
             InitializeButtons();
-            blender.Initialize(OnMixed);
+            blender.Initialize(OnMixing);
             levelLoader.Initialize(OnLevelLoaded);
             menu.ActivateButton(MenuButton.Start);
         }
@@ -39,20 +40,23 @@ namespace Obodets.Scripts.Base
         {
             matchCalculator.ResetPercent();
             blender.Clear();
-            bunchesSpawner.Spawn(bunches, blender.IngredientPlacePoint, blender.AddIngredient);
+            bunchesList.Spawn(bunches, blender.IngredientPlacePoint, blender.AddIngredient);
+            bunchesList.ActiveSpawn(true);
         }
 
-        private void OnMixed(Color resultColor)
+        private void OnMixing(Color resultColor, float duration)
         {
-            var completed = matchCalculator.Match(resultColor, levelLoader.GetCurrentLevelData().RequiredColor);
+            var success = matchCalculator.Match(resultColor, levelLoader.GetCurrentLevelData().RequiredColor);
 
-            if (completed)
-            {
-                menu.ActivateButton(MenuButton.NextLevel);
-                return;
-            }
+            bunchesList.ActiveSpawn(false);
+            StartCoroutine(WaitForMix(success, duration));
+        }
 
-            menu.ActivateButton(MenuButton.Restart);
+        private IEnumerator WaitForMix(bool success, float duration)
+        {
+            yield return new WaitForSeconds(duration);
+            
+            menu.ActivateButton(success ? MenuButton.NextLevel : MenuButton.Restart);
         }
     }
 }
