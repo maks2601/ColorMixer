@@ -18,9 +18,10 @@ namespace Obodets.Scripts.BlenderModule
         [SerializeField] private float mixingTime;
         [SerializeField] private float clearingTime;
         private readonly HashSet<Ingredient> _ingredients = new();
-        private Action<Color, float> _onMixing;
-
+        
         public Transform IngredientPlacePoint => ingredientPlacePoint;
+        public event Action<Color> OnStartMixing;
+        public event Action OnEndMixing;
 
         private void Awake()
         {
@@ -36,7 +37,7 @@ namespace Obodets.Scripts.BlenderModule
             var colors = _ingredients.Select(ingredient => ingredient.IngredientColor).ToList();
 
             var resultColor = colors.CalculateAverageColor();
-            _onMixing?.Invoke(resultColor, mixingTime);
+            OnStartMixing?.Invoke(resultColor);
 
             liquidAnimator.SetColor(resultColor);
             liquidAnimator.Fill(mixingTime);
@@ -54,17 +55,13 @@ namespace Obodets.Scripts.BlenderModule
             }
             
             _ingredients.Clear();
+            OnEndMixing?.Invoke();
         }
 
         public void Clear()
         {
             mixButton.Active(true);
             liquidAnimator.Empty(clearingTime);
-        }
-
-        public void Initialize(Action<Color, float> onMixing)
-        {
-            _onMixing = onMixing;
         }
 
         public void AddIngredient(Ingredient ingredient)

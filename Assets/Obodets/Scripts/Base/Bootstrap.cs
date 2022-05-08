@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using Obodets.Scripts.BlenderModule;
 using Obodets.Scripts.IngredientModule;
@@ -14,11 +13,13 @@ namespace Obodets.Scripts.Base
         [SerializeField] private Blender blender;
         [SerializeField] private MatchCalculator matchCalculator;
         [SerializeField] private Menu menu;
+        private bool _gameResult;
 
         private void Start()
         {
             InitializeButtons();
-            blender.Initialize(OnMixing);
+            blender.OnStartMixing += CalculateResult;
+            blender.OnEndMixing += DisplayResult;
             levelLoader.Initialize(OnLevelLoaded);
             menu.ActivateButton(MenuButton.Start);
         }
@@ -44,19 +45,15 @@ namespace Obodets.Scripts.Base
             bunchesList.ActiveSpawn(true);
         }
 
-        private void OnMixing(Color resultColor, float duration)
+        private void CalculateResult(Color resultColor)
         {
-            var success = matchCalculator.Match(resultColor, levelLoader.GetCurrentLevelData().RequiredColor);
-
+            _gameResult = matchCalculator.Match(resultColor, levelLoader.GetCurrentLevelData().RequiredColor);
             bunchesList.ActiveSpawn(false);
-            StartCoroutine(WaitForMix(success, duration));
         }
 
-        private IEnumerator WaitForMix(bool success, float duration)
+        private void DisplayResult()
         {
-            yield return new WaitForSeconds(duration);
-            
-            menu.ActivateButton(success ? MenuButton.NextLevel : MenuButton.Restart);
+            menu.ActivateButton(_gameResult ? MenuButton.NextLevel : MenuButton.Restart);
         }
     }
 }
